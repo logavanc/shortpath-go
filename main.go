@@ -7,9 +7,14 @@ import (
 	"path"
 )
 
+const (
+	shortestLength      = 3
+	truncationIndicator = '…'
+)
+
 func shortest(node string, otherNodes []string) (short string) {
 	var matched bool
-	for i := 3; i < len(node); i++ {
+	for i := shortestLength; i < len(node); i++ {
 		matched = false
 		for _, otherNode := range otherNodes {
 			if len(otherNode) > i && node[:i] == otherNode[:i] {
@@ -18,7 +23,7 @@ func shortest(node string, otherNodes []string) (short string) {
 			}
 		}
 		if !matched {
-			return fmt.Sprintf("%s…", node[:i])
+			return fmt.Sprintf("%s%c", node[:i], truncationIndicator)
 		}
 	}
 	return node
