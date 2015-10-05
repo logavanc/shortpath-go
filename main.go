@@ -3,11 +3,8 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path"
-
-	"github.com/boltdb/bolt"
 )
 
 func shortest(node string, otherNodes []string) (short string) {
@@ -65,11 +62,11 @@ func getShortPath(dirPath string, depth int) (shortPath string) {
 }
 
 func main() {
-	db, err := bolt.Open("my.db", 0600, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
+	// db, err := bolt.Open("my.db", 0600, nil)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// defer db.Close()
 
 	if cwd, err := os.Getwd(); err == nil {
 		fmt.Printf("%s", getShortPath(cwd, 0))
