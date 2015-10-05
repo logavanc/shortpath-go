@@ -5,10 +5,10 @@
 -->
 
 
-Package "shortpath" for Go
+"shortpath" Command Line Utility
 ======================
 
-[`shortpath`](https://github.com/logavanc/shortpath) is a command line utility (written using [Go](http://golang.org)) that returns a string representing the current working directory where the name of each parent directory has been shortened to the smallest uniquely identifiable string for the directory in which it resides. The primary intended use case for this utility is to construct the current working directory in the command line prompt.  For example, a normal prompt would contain the full path to the current working directory (pwd) in the prompt, but with my [`shortpath`](https://github.com/logavanc/shortpath) utility, the prompt is shortened considerably without removing so much information that confusion could occur.
+[`shortpath`](https://github.com/logavanc/shortpath) is a command line utility (written in [Go](http://golang.org)) that returns a string representing the current working directory where the name of each parent directory has been shortened to the smallest uniquely identifiable string for the directory in which it resides. The primary intended use case for this utility is to construct the current working directory in the command line prompt.  For example, a normal prompt would contain the full path to the current working directory (pwd) in the prompt, but with my [`shortpath`](https://github.com/logavanc/shortpath) utility, the prompt is shortened considerably without removing so much information that confusion could occur.
 
 ![The "shortpath" utility in use.](/images/example.png)
 
