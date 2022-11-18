@@ -3,13 +3,13 @@
 [![Build Status](https://travis-ci.org/logavanc/largs.svg?branch=master)](https://travis-ci.org/logavanc/largs)
 [![Coverage Status](https://img.shields.io/coveralls/logavanc/largs.svg)](https://coveralls.io/r/logavanc/largs)
 -->
-[![Go Report Card](https://goreportcard.com/badge/github.com/logavanc/shortpath)](https://goreportcard.com/report/github.com/logavanc/shortpath)
+[![Go Report Card](https://goreportcard.com/badge/github.com/logavanc/shortpath-go)](https://goreportcard.com/report/github.com/logavanc/shortpath-go)
 
 
 The "shortpath" tool...
 ======================
 
-...is a command line utility (written in [Go](http://golang.org)) that returns a string representing the current working directory where the name of each parent directory has been shortened to the smallest uniquely identifiable string for the directory in which it resides. The primary intended use case for this utility is to construct the current working directory in the command line prompt.  For example, a normal prompt would contain the full path to the current working directory (pwd) in the prompt, but with my [`shortpath`](https://github.com/logavanc/shortpath) utility, the prompt is shortened considerably without removing so much information that confusion could occur.
+...is a command line utility (written in [Go](http://golang.org)) that returns a string representing the current working directory where the name of each parent directory has been shortened to the smallest uniquely identifiable string for the directory in which it resides. The primary intended use case for this utility is to construct the current working directory in the command line prompt.  For example, a normal prompt would contain the full path to the current working directory (pwd) in the prompt, but with my [`shortpath`](https://github.com/logavanc/shortpath-go) utility, the prompt is shortened considerably without removing so much information that confusion could occur.
 
 ![The "shortpath" utility in use.](/images/example.png)
 
@@ -19,12 +19,18 @@ At the moment, it simply walks up the current working directory path and finds t
 Installing
 ----------
 
-    go get github.com/logavanc/shortpath
+```bash
+    # Old:
+    go get github.com/logavanc/shortpath-go
+
+    # New:
+    go install github.com/logavanc/shortpath-go/cli/shortpath@latest
+```
 
 Documentation
 -------------
 
-See [documentation on godoc.org](https://godoc.org/github.com/logavanc/shortpath).
+See [documentation on godoc.org](https://godoc.org/github.com/logavanc/shortpath-go).
 
 License
 -------

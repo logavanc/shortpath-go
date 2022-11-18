@@ -17,33 +17,31 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
+// The 'shortpath' program is a small command line utility that returns a short
+// but unique string representing the current working directory.
 package main
 
-import "errors"
+import (
+	"fmt"
+	"log"
+	"os"
 
-// CrawlerOption is...
-type CrawlerOption func(*Crawler) error
+	"github.com/logavanc/shortpath-go/internal/shortpath"
+)
 
-// ShortestLength is a CrawlerOption that sets the minimum number of runes a
-// directory will be shortened to.
-func ShortestLength(l int) (f func(*Crawler) error) {
-	f = func(c *Crawler) (err error) {
-		if l > 0 {
-			c.shortestLength = l
-		} else {
-			err = errors.New("Invalid shortest length option, must be > 0.")
+func main() {
+	myCrawler, err := shortpath.New(
+		shortpath.ShortestLength(3),
+		shortpath.TruncationIndicator('…'),
+	)
+	if err == nil {
+		cwd, err := os.Getwd()
+		if err == nil {
+			fmt.Printf("%s", myCrawler.ShortPath(cwd, 0))
 		}
-		return
 	}
-	return
-}
 
-// TruncationIndicator is a CrawlerOption that sets the runes used to indicate
-// that truncation has occurred.
-func TruncationIndicator(r rune) (f func(*Crawler) error) {
-	f = func(c *Crawler) (err error) {
-		c.truncationIndicator = r
-		return
+	if err != nil {
+		log.Fatal(err)
 	}
-	return
 }
