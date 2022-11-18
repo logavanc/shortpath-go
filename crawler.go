@@ -52,7 +52,7 @@ func (c *Crawler) Shortest(s string, others []string) (short string) {
 	for i := c.shortestLength; i < len(s); i++ {
 		matched = false
 		for _, other := range others {
-			if len(other) > i && s[:i] == other[:i] {
+			if len(other) >= i && s[:i] == other[:i] {
 				matched = true
 				break
 			}
