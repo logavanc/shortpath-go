@@ -124,9 +124,10 @@ func (ps *PathShortener) shorten(p string, depth int) (short string) {
 	)
 }
 
-func (ps *PathShortener) ShortenPath(path string, err error) (short string) {
+func (ps *PathShortener) ShortenPath(p string, err error) (short string) {
 	if err != nil {
 		return unknownWorkingDir
 	}
-	return ps.shorten(path, 0)
+	p = path.Clean(p)
+	return ps.shorten(p, 0)
 }
