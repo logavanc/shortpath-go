@@ -124,10 +124,48 @@ func (ps *PathShortener) shorten(p string, depth int) (short string) {
 	)
 }
 
+func (ps *PathShortener) shortenAlt(p string) (short string) {
+	if p == ps.userHomePath {
+		// Early out in home directory.
+		return "~"
+	}
+
+	// Always split out the current directory as full name.
+	parent, dir := path.Split(p)
+	parent = parent[:len(parent)-1] // remove trailing slash
+	short += dir
+
+	for {
+		// Loop ending conditions...
+		switch parent {
+		case ps.userHomePath:
+			short = path.Join("~", short)
+			return
+		case "":
+			short = path.Join("/", short)
+			return
+		}
+
+		// Split out the next parent directory.
+		parent, dir = path.Split(parent)
+		parent = parent[:len(parent)-1] // remove trailing slash
+
+		others, err := ps.getOthers(parent, dir)
+		if err != nil {
+			// If I can't find the others, we can't truncate.
+			short = path.Join(dir, short)
+			continue
+		}
+
+		trunc := ps.truncate(dir, others)
+		short = path.Join(trunc, short)
+	}
+}
+
 func (ps *PathShortener) ShortenPath(p string, err error) (short string) {
 	if err != nil {
 		return unknownWorkingDir
 	}
-	p = path.Clean(p)
-	return ps.shorten(p, 0)
+	p = path.Clean(p) // Just always clean the path.
+	return ps.shortenAlt(p)
 }

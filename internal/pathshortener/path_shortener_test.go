@@ -12,12 +12,13 @@ var testCases = []struct {
 	err      error
 	expected string
 }{
-	{"", "", errors.New(""), unknownWorkingDir},
+	{"root special case", "/", nil, "/"},
+	{"home special case", "/home/user", nil, "~"},
+	{"unknown cwd", "", errors.New(""), unknownWorkingDir},
 	{"", "/home/user/aaaxxx/test", nil, "~/aaax…/test"},
 	{"", "/home/user/bbbxxx/test", nil, "~/bbb…/test"},
 	{"", "/secret/aaaxxx/test", nil, "/sec…/aaaxxx/test"},
-	{"", "/", nil, "/"},
-	{"", "////", nil, "/"},
+	{"path cleaning", "////", nil, "/"},
 }
 
 func buildMockedPathShortener() (sp *PathShortener) {
